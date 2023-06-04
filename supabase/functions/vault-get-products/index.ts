@@ -3,7 +3,7 @@
 // This enables autocomplete, go to definition, etc.
 
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts"
-import Stripe from "https://esm.sh/stripe@11.1.0?target=deno&deno-std=0.132.0&no-check";
+import Stripe from "stripe";
 
 const stripe: any = new Stripe(Deno.env.get('STRIPE_API_KEY') as string,{
   // This is needed to use the Fetch API rather than relying on the Node http

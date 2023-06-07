@@ -6,11 +6,26 @@ import { serve } from "deno";
 import stripe from "../utils/utils.ts";
 
 serve(async (req) => {
-  // get products from stripe
+  // create a customer in stripe
   try{
-    const products = await stripe.products.list();
+    const { email, name } = await req.json();
+    const email_and_name_not_provided: bool =  !email || !name;
+
+    if (email_and_name_not_provided) {
+      return new Response(
+        JSON.stringify({ error: "email & name are required" }),
+        { headers: { "Content-Type": "application/json" } },
+      )
+    }
+
+    const customer = await stripe.customers.create({
+      description: `Customer for ${email}`,
+      email: email,
+      name: name,
+
+    });
     return new Response(
-      JSON.stringify(products.data),
+      JSON.stringify(customer),
       { headers: { "Content-Type": "application/json" } },
     )
   }
@@ -20,7 +35,6 @@ serve(async (req) => {
       { headers: { "Content-Type": "application/json" } },
     )
   }
-
 })
 
 // To invoke:

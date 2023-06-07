@@ -2,15 +2,15 @@
 // https://deno.land/manual/getting_started/setup_your_environment
 // This enables autocomplete, go to definition, etc.
 
-import { serve } from "deno";
-import stripe from "../utils/utils.ts";
+import { serve } from "deno"
+import stripe from "../utils/utils.ts"
 
 serve(async (req) => {
-  // get products from stripe
+  // get customers from stripe
   try{
-    const products = await stripe.products.list();
+    const customers = await stripe.customers.list();
     return new Response(
-      JSON.stringify(products.data),
+      JSON.stringify(customers.data),
       { headers: { "Content-Type": "application/json" } },
     )
   }
@@ -20,7 +20,6 @@ serve(async (req) => {
       { headers: { "Content-Type": "application/json" } },
     )
   }
-
 })
 
 // To invoke:

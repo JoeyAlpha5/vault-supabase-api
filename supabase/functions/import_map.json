@@ -1,5 +1,6 @@
 {
     "imports": {
-      "stripe": "https://esm.sh/stripe@11.1.0?target=deno&deno-std=0.132.0&no-check"
+      "stripe": "https://esm.sh/stripe@11.1.0?target=deno&deno-std=0.132.0&no-check",
+      "deno": "https://deno.land/std@0.168.0/http/server.ts"
     }
   }

@@ -13,6 +13,8 @@ Subscriptions to products can be created for customers using the CREATE Subscrip
 ### API endpoint 
 
 Use the following endpoint when making requests:
-**https://prncsikwvviobywpyxjp.supabase.co/functions/v1/`api-end-point`**
+https://`project-ref`.supabase.co/functions/v1/`api-end-point`
+
+Replace **`project-ref`** with the supabase Project reference.
 
 Replace **`api-end-pont`** with the necessary endpoint name, i.e **`vault-get-products`** to get the products from stripe. Use [this postman documentation](https://documenter.getpostman.com/view/20677220/2s93sZ7aDi) to see all possible requests.

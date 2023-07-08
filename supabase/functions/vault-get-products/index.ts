@@ -13,7 +13,10 @@ serve(async (req) => {
 
   // get products from stripe
   try{
-    let products = await stripe.products.list({});
+    let products = await stripe.products.list({
+      expand: ["data.default_price"]
+    });
+    
     if(search_submitted){
       products = await stripe.products.search({
         expand: ["data.default_price"],

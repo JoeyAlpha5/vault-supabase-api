@@ -6,9 +6,21 @@ import { serve } from "deno";
 import stripe from "../utils/utils.ts";
 
 serve(async (req) => {
+  // get search keywords from request if any
+  const { search } = await req.json();
+  const search_submitted: bool = search;
+
+
   // get products from stripe
   try{
-    const products = await stripe.products.list();
+    let products = await stripe.products.list({});
+    if(search_submitted){
+      products = await stripe.products.search({
+        expand: ["data.default_price"],
+        query: 'name~\''+search+'\' OR description~\''+search+'\'',
+      });
+    }
+
     return new Response(
       JSON.stringify(products.data),
       { headers: { "Content-Type": "application/json" } },

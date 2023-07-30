@@ -16,7 +16,7 @@ serve(async (req) => {
     let products = await stripe.products.list({
       expand: ["data.default_price"]
     });
-    
+
     if(search_submitted){
       products = await stripe.products.search({
         expand: ["data.default_price"],
@@ -24,8 +24,13 @@ serve(async (req) => {
       });
     }
 
+
+    const excludedProductId = 'prod_OMJkP2AecVFjzX';
+    const filteredProducts = products.data.filter((product) => product.id !== excludedProductId);
+
+
     return new Response(
-      JSON.stringify(products.data),
+      JSON.stringify(filteredProducts),
       { headers: { "Content-Type": "application/json" } },
     )
   }
